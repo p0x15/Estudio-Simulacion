@@ -260,5 +260,57 @@ const studyData = {
                 details: "Ejemplo: llegadas a una gasolinera con λ(t) que crece en la mañana y decrece en la noche."
             }
         ]
-    }
+    },
+    customQuestions: [
+        {
+            question: "Estás modelando el tráfico de una ciudad hora por hora para ver su evolución. ¿Qué tipo de modelo es?",
+            answer: "Modelo Dinámico",
+            options: ["Modelo Estático", "Simulación Monte Carlo", "Modelo de Optimización"]
+        },
+        {
+            question: "Si lanzas una moneda 10 veces y cuentas el número total de 'caras' (éxitos), ¿qué distribución usas?",
+            answer: "Distribución Binomial",
+            options: ["Distribución Bernoulli", "Distribución Poisson", "Distribución Geométrica"]
+        },
+        {
+            question: "Llegan clientes a un banco a una tasa constante de 5 por hora. ¿Qué distribución modela el NÚMERO de llegadas en una hora?",
+            answer: "Distribución Poisson",
+            options: ["Distribución Exponencial", "Distribución Normal", "Distribución Uniforme"]
+        },
+        {
+            question: "En el mismo banco, ¿qué distribución modela el TIEMPO que pasa entre la llegada de un cliente y el siguiente?",
+            answer: "Distribución Exponencial",
+            options: ["Distribución Poisson", "Distribución Binomial", "Distribución Weibull"]
+        },
+        {
+            question: "Necesitas simular el tiempo de vida de un componente electrónico hasta que falla por desgaste.",
+            answer: "Distribución Weibull",
+            options: ["Distribución Bernoulli", "Distribución Poisson", "Distribución Binomial"]
+        },
+        {
+            question: "Estás calculando la ruta crítica de un proyecto donde los tiempos de cada tarea son inciertos (probabilísticos). ¿Qué método es indispensable?",
+            answer: "Simulación Monte Carlo",
+            options: ["Método de la Ruta Crítica (CPM) tradicional", "Simulación Discreta", "Modelo de Optimización"]
+        },
+        {
+            question: "La tasa de llegada de pacientes a urgencias aumenta drásticamente en la noche y baja en la mañana. ¿Qué proceso describe esto?",
+            answer: "Proceso de Poisson No Homogéneo",
+            options: ["Proceso de Poisson Homogéneo", "Distribución Exponencial", "Distribución Normal"]
+        },
+        {
+            question: "Quieres estimar el valor de PI lanzando miles de puntos al azar en un cuadrado. ¿Qué tipo de simulación es?",
+            answer: "Simulación Estática (Monte Carlo)",
+            options: ["Simulación Dinámica", "Simulación de Eventos Discretos", "Modelo Determinista"]
+        },
+        {
+            question: "Buscas el número de intentos necesarios hasta conseguir el PRIMER éxito en una venta telefónica.",
+            answer: "Distribución Geométrica",
+            options: ["Distribución Binomial", "Distribución Poisson", "Distribución Hipergeométrica"]
+        },
+        {
+            question: "Estás simulando una línea de producción donde el estado cambia solo cuando una pieza entra o sale de una máquina.",
+            answer: "Simulación de Evento Discreto",
+            options: ["Simulación Continua", "Simulación Monte Carlo", "Modelo Estático"]
+        }
+    ]
 };
