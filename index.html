@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Simulación Master</h1>
+            <p>Domina la teoría de simulación de sistemas</p>
+        </header>
+
+        <main id="main-content">
+            <!-- Views will be injected here by JavaScript -->
+            <div id="menu-view" class="view active">
+                <h2>Elige tu modo de estudio</h2>
+                <div class="mode-grid">
+                    <button class="card mode-btn" onclick="startGame('flashcards')">
+                        <div class="icon">🗂️</div>
+                        <h3>Flashcards</h3>
+                        <p>Repasa conceptos clave uno a uno</p>
+                    </button>
+                    <button class="card mode-btn" onclick="startGame('match')">
+                        <div class="icon">🔗</div>
+                        <h3>Conectar</h3>
+                        <p>Une los términos con sus definiciones</p>
+                    </button>
+                    <button class="card mode-btn" onclick="startGame('quiz')">
+                        <div class="icon">❓</div>
+                        <h3>Quiz Rápido</h3>
+                        <p>Pon a prueba tu conocimiento</p>
+                    </button>
+                </div>
+            </div>
+
+            <div id="game-view" class="view hidden">
+                <div class="game-header">
+                    <button class="back-btn" onclick="showMenu()">← Volver</button>
+                    <span id="game-title">Modo Juego</span>
+                    <span id="score-display">Puntos: 0</span>
+                </div>
+                <div id="game-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
