@@ -34,6 +34,7 @@ function startGame(mode) {
     if (mode === 'flashcards') startFlashcards();
     else if (mode === 'match') startMatching();
     else if (mode === 'quiz') startQuiz();
+    else if (mode === 'hard') startHardMode();
 }
 
 function updateScore(points) {
@@ -227,6 +228,43 @@ function checkQuizAnswer(btn, selected, correct) {
 
     setTimeout(() => {
         currentIndex++;
-        renderQuizQuestion();
+        if (currentMode === 'quiz') renderQuizQuestion();
+        else renderHardQuestion();
     }, 1500);
+}
+
+// --- Hard Mode Logic ---
+function startHardMode() {
+    currentItems = studyData.customQuestions.sort(() => Math.random() - 0.5);
+    currentIndex = 0;
+    renderHardQuestion();
+}
+
+function renderHardQuestion() {
+    if (currentIndex >= currentItems.length) {
+        document.getElementById('game-container').innerHTML = `
+            <div style="text-align: center;">
+                <h2>¡Reto Difícil Completado!</h2>
+                <p>Puntuación final: ${score}</p>
+                <button class="btn btn-primary" onclick="showMenu()" style="margin-top: 1rem;">Volver al Menú</button>
+            </div>
+        `;
+        return;
+    }
+
+    const item = currentItems[currentIndex];
+    // Include the correct answer in options if not already there (though data should have it)
+    // For this mode, options are pre-defined in data.js
+    const options = [...item.options, item.answer].sort(() => Math.random() - 0.5);
+
+    const container = document.getElementById('game-container');
+    container.innerHTML = `
+        <div class="quiz-question">
+            <p style="color: var(--secondary); font-weight:bold; font-size: 1rem; margin-bottom: 1rem;">🔥 Pregunta de Aplicación ${currentIndex + 1}</p>
+            <h3>${item.question}</h3>
+        </div>
+        <div class="quiz-options">
+            ${options.map(opt => `<button class="quiz-option" onclick="checkQuizAnswer(this, '${opt}', '${item.answer}')">${opt}</button>`).join('')}
+        </div>
+    `;
 }
