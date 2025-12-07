@@ -74,6 +74,18 @@ const studyData = {
             {
                 term: "Eventos",
                 definition: "Ocurrencias que cambian el estado del sistema (ej. llegada de un cliente)."
+            },
+            {
+                term: "Simulación Monte Carlo",
+                definition: "Procedimiento estadístico que usa números aleatorios para modelar sistemas con variables aleatorias, principalmente estáticos."
+            },
+            {
+                term: "Ruta Crítica",
+                definition: "Secuencia de actividades que determina el tiempo total de finalización de un proyecto (el proceso más lento)."
+            },
+            {
+                term: "Ruta Crítica Probabilística",
+                definition: "Los tiempos son aleatorios (distribuciones) y se requiere simulación para capturar la variabilidad."
             }
         ],
         lists: [
@@ -88,6 +100,24 @@ const studyData = {
                 ]
             },
             {
+                title: "Ventajas de la Simulación",
+                items: [
+                    "Permite experimentar sin interrumpir el sistema real",
+                    "Facilita analizar sistemas complejos",
+                    "Ayuda a validar soluciones analíticas",
+                    "Sirve como herramienta pedagógica y de diseño"
+                ]
+            },
+            {
+                title: "Desventajas de la Simulación",
+                items: [
+                    "Puede ser costosa en tiempo y recursos",
+                    "Requiere datos suficientes y confiables",
+                    "Si no se valida bien, los resultados pueden ser engañosos",
+                    "No siempre es la mejor opción si existe solución analítica"
+                ]
+            },
+            {
                 title: "Pasos de un estudio por simulación",
                 ordered: true,
                 items: [
@@ -98,6 +128,28 @@ const studyData = {
                     "Diseñar experimentos (escenarios)",
                     "Ejecutar corridas de simulación",
                     "Analizar resultados y sacar conclusiones"
+                ]
+            },
+            {
+                title: "Aplicaciones de Simulación",
+                items: [
+                    "Aeropuertos: seguridad, transporte",
+                    "Hospitales: asignación de personal, emergencias",
+                    "Puertos: grúas, almacenamiento",
+                    "Minería: transporte de materiales",
+                    "Parques de diversiones: filas y atracciones"
+                ]
+            },
+            {
+                title: "Método de Monte Carlo para Ruta Crítica",
+                ordered: true,
+                items: [
+                    "Representar proyecto como red de actividades",
+                    "Definir distribución de probabilidad para cada actividad",
+                    "Generar tiempos aleatorios",
+                    "Calcular duración total y ruta crítica",
+                    "Repetir muchas veces (corridas)",
+                    "Analizar media, varianza y probabilidades"
                 ]
             }
         ]
