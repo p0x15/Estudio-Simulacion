@@ -2,6 +2,8 @@ let currentMode = '';
 let score = 0;
 let currentItems = [];
 let currentIndex = 0;
+let matchedTerms = new Set();
+let totalConcepts = 0;
 
 // Combine all concepts from both topics
 const getAllConcepts = () => {
@@ -31,10 +33,31 @@ function startGame(mode) {
     const container = document.getElementById('game-container');
     container.innerHTML = '';
 
+    // Reset Progress Bar
+    const progressContainer = document.getElementById('progress-container');
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = '0%';
+
+    if (mode === 'quiz' || mode === 'hard' || mode === 'match') {
+        progressContainer.classList.remove('hidden');
+    } else {
+        progressContainer.classList.add('hidden');
+    }
+
+    // Reset global tracking for match mode
+    if (mode === 'match') {
+        matchedTerms.clear();
+        totalConcepts = getAllConcepts().length;
+    }
+
     if (mode === 'flashcards') startFlashcards();
     else if (mode === 'match') startMatching();
     else if (mode === 'quiz') startQuiz();
     else if (mode === 'hard') startHardMode();
+}
+
+function updateProgressBar(percent) {
+    document.getElementById('progress-bar').style.width = `${percent}%`;
 }
 
 function updateScore(points) {
@@ -93,9 +116,33 @@ let selectedTerm = null;
 let selectedDef = null;
 
 function startMatching() {
-    // Pick 5 random items
-    const allItems = getAllConcepts().sort(() => Math.random() - 0.5);
-    currentItems = allItems.slice(0, 5);
+    const all = getAllConcepts();
+    const remaining = all.filter(item => !matchedTerms.has(item.term));
+
+    // Select up to 5 from remaining (unseen)
+    let selection = remaining.sort(() => Math.random() - 0.5).slice(0, 5);
+
+    // If we have less than 5, we are at the end, fill with already matched for gameplay
+    if (selection.length < 5) {
+        const needed = 5 - selection.length;
+        /* If we want to force strictly new ones, we might end up with < 5 items on board.
+           But game logic expects pairs. 
+           Let's fill with reviews to keep board full if possible, unless we are totally done? 
+           But user wants to know how many until done. So calculating progress based on 'matchedTerms.size' is key.
+        */
+        const review = all.filter(item => matchedTerms.has(item.term))
+            .sort(() => Math.random() - 0.5)
+            .slice(0, needed);
+        selection = [...selection, ...review];
+    }
+
+    currentItems = selection;
+
+    // Check if we already finished EVERYTHING (no new items selected and matchedTerms is full)
+    // Actually, matchedTerms fills up during play.
+
+    // Calculate progress at start of round? No, update dynamically.
+    updateProgressBar((matchedTerms.size / totalConcepts) * 100);
 
     const terms = [...currentItems].sort(() => Math.random() - 0.5);
     const defs = [...currentItems].sort(() => Math.random() - 0.5);
@@ -144,7 +191,13 @@ function handleMatchClick(e) {
             selectedDef.classList.remove('selected');
             selectedTerm.classList.add('correct');
             selectedDef.classList.add('correct');
+            selectedDef.classList.add('correct');
             updateScore(10);
+
+            // Update Global Progress
+            matchedTerms.add(selectedTerm.dataset.id); // Add unique term
+            updateProgressBar((matchedTerms.size / totalConcepts) * 100);
+
             selectedTerm = null;
             selectedDef = null;
 
@@ -171,6 +224,7 @@ function handleMatchClick(e) {
 function startQuiz() {
     currentItems = getAllConcepts().sort(() => Math.random() - 0.5);
     currentIndex = 0;
+    updateProgressBar(0);
     renderQuizQuestion();
 }
 
@@ -201,7 +255,7 @@ function renderQuizQuestion() {
     const container = document.getElementById('game-container');
     container.innerHTML = `
         <div class="quiz-question">
-            <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1rem;">Pregunta ${currentIndex + 1}</p>
+            <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1rem;">Pregunta ${currentIndex + 1} de ${currentItems.length}</p>
             <h3>¿Qué concepto corresponde a esta definición?</h3>
             <p style="margin-top: 1rem; font-style: italic;">"${item.definition}"</p>
         </div>
@@ -209,6 +263,9 @@ function renderQuizQuestion() {
             ${options.map(opt => `<button class="quiz-option" onclick="checkQuizAnswer(this, '${opt}', '${item.term}')">${opt}</button>`).join('')}
         </div>
     `;
+
+    // Update progress
+    updateProgressBar((currentIndex / currentItems.length) * 100);
 }
 
 function checkQuizAnswer(btn, selected, correct) {
@@ -237,6 +294,7 @@ function checkQuizAnswer(btn, selected, correct) {
 function startHardMode() {
     currentItems = studyData.customQuestions.sort(() => Math.random() - 0.5);
     currentIndex = 0;
+    updateProgressBar(0);
     renderHardQuestion();
 }
 
@@ -260,11 +318,12 @@ function renderHardQuestion() {
     const container = document.getElementById('game-container');
     container.innerHTML = `
         <div class="quiz-question">
-            <p style="color: var(--secondary); font-weight:bold; font-size: 1rem; margin-bottom: 1rem;">🔥 Pregunta de Aplicación ${currentIndex + 1}</p>
+            <p style="color: var(--secondary); font-weight:bold; font-size: 1rem; margin-bottom: 1rem;">🔥 Pregunta de Aplicación ${currentIndex + 1} de ${currentItems.length}</p>
             <h3>${item.question}</h3>
         </div>
         <div class="quiz-options">
             ${options.map(opt => `<button class="quiz-option" onclick="checkQuizAnswer(this, '${opt}', '${item.answer}')">${opt}</button>`).join('')}
         </div>
     `;
+    updateProgressBar((currentIndex / currentItems.length) * 100);
 }

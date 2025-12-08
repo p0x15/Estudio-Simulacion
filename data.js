@@ -4,12 +4,12 @@ const studyData = {
         concepts: [
             {
                 term: "Modelo",
-                definition: "Representación o abstracción de un sistema real que incluye los componentes más importantes y sus interacciones.",
+                definition: "Representación (abstracción) de un sistema real y ayuda en la toma de decisiones.",
                 details: "Se utiliza para entender, analizar o predecir el comportamiento de un sistema."
             },
             {
                 term: "Modelo Estático",
-                definition: "No considera el tiempo (ej. ecuaciones lineales)."
+                definition: "Dentro de los modelos matemáticos en simulación de sistemas, aquellos que consideran el comportamiento de un sistema sin tomar en cuenta el tiempo."
             },
             {
                 term: "Modelo Dinámico",
@@ -32,8 +32,8 @@ const studyData = {
                 definition: "Busca la mejor solución bajo criterios dados."
             },
             {
-                term: "Simulación",
-                definition: "Proceso de imitar el comportamiento de un sistema real a través de un modelo computarizado y realizar experimentos con él."
+                term: "Simulación (Simular)",
+                definition: "Proceso de reproducir aproximadamente un sistema real a través de un modelo computarizado y llevar a cabo experimentos con él. Es imitar el comportamiento de un sistema real con un modelo que se comporta de manera similar."
             },
             {
                 term: "Simulación Estática",
@@ -53,7 +53,7 @@ const studyData = {
             },
             {
                 term: "Simulación Estocástica de Evento Discreto",
-                definition: "Modela un sistema cuyo estado cambia en puntos discretos en el tiempo debido a eventos aleatorios."
+                definition: "La simulación de sistemas en los que la variable de estado cambia solo en un conjunto específico de puntos en el tiempo."
             },
             {
                 term: "Entidades",
@@ -86,6 +86,22 @@ const studyData = {
             {
                 term: "Ruta Crítica Probabilística",
                 definition: "Los tiempos son aleatorios (distribuciones) y se requiere simulación para capturar la variabilidad."
+            },
+            {
+                term: "Solución Analítica",
+                definition: "Metodología de modelado que implica la generación de fórmulas o de un procedimiento computacional que calcule el valor exacto de una respuesta."
+            },
+            {
+                term: "Parámetro de salida",
+                definition: "Indica una medida de desempeño del sistema y es una parte integral de un modelo."
+            },
+            {
+                term: "Simulación como herramienta (¿Cuándo NO usarla?)",
+                definition: "Si un problema puede ser resuelto con sentido común y además se tiene poco tiempo, la simulación NO es la herramienta apropiada."
+            },
+            {
+                term: "Componentes básicos de simulación estocástica",
+                definition: "Entidades, Atributos, Actividades, Recursos, Estados, Eventos."
             }
         ],
         lists: [
@@ -150,6 +166,17 @@ const studyData = {
                     "Calcular duración total y ruta crítica",
                     "Repetir muchas veces (corridas)",
                     "Analizar media, varianza y probabilidades"
+                ]
+            },
+            {
+                title: "6 Componentes básicos de la simulación de eventos estocásticos",
+                items: [
+                    "Entidades",
+                    "Atributos",
+                    "Actividades",
+                    "Recursos",
+                    "Estados",
+                    "Eventos"
                 ]
             }
         ]
@@ -311,6 +338,46 @@ const studyData = {
             question: "Estás simulando una línea de producción donde el estado cambia solo cuando una pieza entra o sale de una máquina.",
             answer: "Simulación de Evento Discreto",
             options: ["Simulación Continua", "Simulación Monte Carlo", "Modelo Estático"]
+        },
+        {
+            question: "¿Qué metodología implica generar fórmulas para calcular el valor exacto de una respuesta?",
+            answer: "Solución Analítica",
+            options: ["Simulación Estocástica", "Modelo Heurístico", "Simulación Dinámica"]
+        },
+        {
+            question: "Si un problema se resuelve con sentido común y hay poco tiempo, ¿es apropiada la simulación?",
+            answer: "No, no es la herramienta apropiada",
+            options: ["Sí, siempre es mejor", "Depende del software", "Solo si es complejo"]
+        },
+        {
+            question: "¿Qué es un parámetro de salida en un modelo?",
+            answer: "Una medida de desempeño del sistema",
+            options: ["Una variable de entrada", "Una constante del sistema", "Un atributo de una entidad"]
+        },
+        {
+            question: "¿Cuáles son los 6 componentes básicos de la simulación de eventos estocásticos?",
+            answer: "Entidades, Atributos, Actividades, Recursos, Estados, Eventos",
+            options: ["Entidades, Variables, Tiempo, Costo, Riesgo, Salida", "Modelo, Realidad, Abstracción, Datos, Análisis, Reporte", "Entradas, Procesos, Salidas, Retroalimentación, Control, Entorno"]
+        },
+        {
+            question: "En la generación de números pseudo aleatorios, ¿qué características básicas se buscan?",
+            answer: "Uniformidad e Independencia",
+            options: ["Uniformidad e Independencia", "Dinamismo y Tendencia", "Solo Uniformidad", "Complejidad y Estructura"]
+        },
+        {
+            question: "La simulación del problema de vendedor de periódico podría ser descrito como:",
+            answer: "Estático-estocástico",
+            options: ["Continuo-Determinístico", "Discreto-Dinámico", "Estático-Determinístico"]
+        },
+        {
+            question: "En la generación de números aleatorios (pseudo), ¿cuál es la característica que ayuda a saber cuándo tus números empezarán a crear un patrón?",
+            answer: "Periodo",
+            options: ["Módulo", "Semilla", "Constante de incremento"]
+        },
+        {
+            question: "En la generación de números aleatorios, ¿cuál es la prueba más poderosa para verificar la frecuencia, incluso en muestras pequeñas?",
+            answer: "Kolmogorov-Smirnov",
+            options: ["La prueba de chi-cuadrado", "Autocorrelación", "Secuencias"]
         }
     ]
 };
